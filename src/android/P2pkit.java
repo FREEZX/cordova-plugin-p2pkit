@@ -3,6 +3,7 @@ package org.freezx.p2pkit;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
 
+import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,7 +47,9 @@ public class P2pkit extends CordovaPlugin {
                 JSONObject json=new JSONObject();
                 json.put("type", "onP2PStateChanged");
                 json.put("state", state);
-                discoveryListenerCallbackContext.success(json.toString());
+                PluginResult result = new PluginResult(PluginResult.Status.OK, json.toString());
+                result.setKeepCallback(true);
+                discoveryListenerCallbackContext.sendPluginResult(result);
             } catch(Exception e) {
                 
             }
@@ -61,7 +64,9 @@ public class P2pkit extends CordovaPlugin {
                 peerJson.put("uuid", peer.getNodeId().toString());
                 peerJson.put("proximityStrength", peer.getProximityStrength ());
                 json.put("peer", peerJson);
-                discoveryListenerCallbackContext.success(json.toString());
+                PluginResult result = new PluginResult(PluginResult.Status.OK, json.toString());
+                result.setKeepCallback(true);
+                discoveryListenerCallbackContext.sendPluginResult(result);
             } catch(Exception e) {
                 
             }
@@ -76,7 +81,9 @@ public class P2pkit extends CordovaPlugin {
                 peerJson.put("uuid", peer.getNodeId().toString());
                 peerJson.put("proximityStrength", peer.getProximityStrength ());
                 json.put("peer", peerJson);
-                discoveryListenerCallbackContext.success(json.toString());
+                PluginResult result = new PluginResult(PluginResult.Status.OK, json.toString());
+                result.setKeepCallback(true);
+                discoveryListenerCallbackContext.sendPluginResult(result);
             } catch(Exception e) {
                 
             }
@@ -91,7 +98,9 @@ public class P2pkit extends CordovaPlugin {
                 peerJson.put("uuid", peer.getNodeId().toString());
                 peerJson.put("proximityStrength", peer.getProximityStrength ());
                 json.put("peer", peerJson);
-                discoveryListenerCallbackContext.success(json.toString());
+                PluginResult result = new PluginResult(PluginResult.Status.OK, json.toString());
+                result.setKeepCallback(true);
+                discoveryListenerCallbackContext.sendPluginResult(result);
             } catch(Exception e) {
 
             }
@@ -106,7 +115,9 @@ public class P2pkit extends CordovaPlugin {
                 peerJson.put("uuid", peer.getNodeId().toString());
                 peerJson.put("proximityStrength", peer.getProximityStrength ());
                 json.put("peer", peerJson);
-                discoveryListenerCallbackContext.success(json.toString());
+                PluginResult result = new PluginResult(PluginResult.Status.OK, json.toString());
+                result.setKeepCallback(true);
+                discoveryListenerCallbackContext.sendPluginResult(result);
             } catch(Exception e) {
                 
             }
@@ -149,6 +160,8 @@ public class P2pkit extends CordovaPlugin {
     private void createP2pDiscoveryListener(CallbackContext callbackContext) {
         discoveryListenerCallbackContext = callbackContext;
         P2PKitClient.getInstance(this.cordova.getActivity()).getDiscoveryServices().addP2pListener(mP2pDiscoveryListener);
+        PluginResult pluginResult = new PluginResult(PluginResult.Status.NO_RESULT);
+        pluginResult.setKeepCallback(true);
     }
 
     private void isP2PServicesAvailable(CallbackContext callbackContext) {
@@ -163,6 +176,7 @@ public class P2pkit extends CordovaPlugin {
     private void enableP2PKit(String apikey, CallbackContext callbackContext) {
         P2PKitClient client = P2PKitClient.getInstance(this.cordova.getActivity());
         client.enableP2PKit(mStatusCallback, apikey);
+        callbackContext.success();
     }
 }
 
