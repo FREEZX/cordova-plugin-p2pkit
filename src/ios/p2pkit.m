@@ -26,12 +26,12 @@
     discoveryListenerCallbackId = command.callbackId;
     CDVPluginResult* pluginResult = nil;
     
-    [PPKController startP2PDiscoveryWithDiscoveryInfo:nil];
+    [PPKController startP2PDiscoveryWithDiscoveryInfo:nil stateRestoration:YES];
     [PPKController enableProximityRanging];
     
     pluginResult =[CDVPluginResult resultWithStatus:CDVCommandStatus_NO_RESULT];
     [pluginResult setKeepCallbackAsBool:true];
-    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:discoveryListenerCallbackId];
     
 }
 
@@ -50,15 +50,6 @@
     switch ((PPKErrorCode) error.code) {
         case PPKErrorAppKeyInvalid:
             description = @"Invalid app key";
-            break;
-        case PPKErrorOnlineAppKeyExpired:
-            description = @"Online app key expired";
-            break;
-        case PPKErrorAppKeyExpired:
-            description = @"App key expired";
-            break;
-        case PPKErrorOnlineAppKeyInvalid:
-            description = @"Online app key invalid";
             break;
         case PPKErrorOnlineProtocolVersionNotSupported:
             description = @"Server protocol mismatch";
@@ -102,9 +93,11 @@
 }
 
 -(void)p2pDiscoveryStateChanged:(PPKPeer2PeerDiscoveryState)state {
+    NSString *stateStr = [NSString stringWithFormat:@"%d", state];
+    
     NSDictionary *jsonDict = [NSDictionary dictionaryWithObjectsAndKeys:
                               @"type", @"onP2PStateChanged",
-                              @"state", state,
+                              @"state", stateStr,
                               nil];
     
     NSError *error = nil;
