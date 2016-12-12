@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-p2pkit",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Cool plugin description",
   "cordova": {
     "id": "org.freezx.p2pkit",
