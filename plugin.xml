@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="org.freezx.p2pkit" version="0.0.1">
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="cordova-plugin-p2pkit" version="0.0.6">
   <name>p2pkit</name>
   <description>Cool plugin description</description>
   <js-module name="p2pkit" src="www/p2pkit.js">
