@@ -1,6 +1,11 @@
 Use p2pkit with cordova! iOS and Android supported.
 Currently limited to enabling and discovery due to my limited available time and scope when starting this, but everything else should be fairly easy to add. PRs and bug reports welcome!
 
+Installing:
+```
+cordova plugin add cordova-plugin-p2pkit --variable BLUETOOTH_USAGE_DESCRIPTION="your usage message" --save
+```
+
 Functions:
 
 ```
