@@ -39,7 +39,7 @@
 
 -(void)PPKControllerInitialized {
     NSLog(@"Controller initialized");
-    
+        
     CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     [self.commandDelegate sendPluginResult:result callbackId:initializedCallbackId];
 }
@@ -96,8 +96,8 @@
     NSString *stateStr = [NSString stringWithFormat:@"%d", state];
     
     NSDictionary *jsonDict = [NSDictionary dictionaryWithObjectsAndKeys:
-                              @"type", @"onP2PStateChanged",
-                              @"state", stateStr,
+                              @"onP2PStateChanged", @"type",
+                              stateStr, @"state",
                               nil];
     
     NSError *error = nil;
@@ -111,13 +111,14 @@
 }
 
 -(NSString*)buildJsonForPeer:(PPKPeer*)peer type:(NSString*) type {
+    NSString *proximityStr = [NSString stringWithFormat:@"%d", peer.proximityStrength];
     NSDictionary *peerDict = [NSDictionary dictionaryWithObjectsAndKeys:
-                              @"uuid", peer.peerID,
-                              @"proximity", peer.proximityStrength,
+                              peer.peerID, @"uuid",
+                              proximityStr, @"proximity",
                               nil];
     NSDictionary *jsonDict = [NSDictionary dictionaryWithObjectsAndKeys:
-                              @"type", type,
-                              @"peer", peerDict,
+                              type, @"type",
+                              peerDict, @"peer",
                               nil];
     
     NSError *error = nil;
